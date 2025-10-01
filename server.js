@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+// Trust proxy - required for getting real client IP behind reverse proxies (Render, Railway, etc)
+app.set('trust proxy', true);
 
 // Middleware
 app.use(express.json());
@@ -24,7 +27,13 @@ app.use((req, res, next) => {
 // Main API endpoint - responds based on current configuration
 app.all('/api', async (req, res) => {
   const timestamp = new Date().toISOString();
-  const clientIP = req.ip || req.connection.remoteAddress;
+  
+  // Get real client IP (works behind proxies like Render, Railway, etc)
+  const clientIP = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
+                   req.headers['x-real-ip'] || 
+                   req.ip || 
+                   req.connection.remoteAddress || 
+                   'Unknown';
   
   console.log('\n' + '='.repeat(60));
   console.log(`📥 INCOMING API CALL - ${timestamp}`);

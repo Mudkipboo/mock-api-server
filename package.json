@@ -1,0 +1,19 @@
+{
+  "name": "mock-api-server",
+  "version": "1.0.0",
+  "description": "A configurable mock API server for testing different HTTP responses and network conditions",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["mock", "api", "testing", "server"],
+  "author": "Mudkipboo",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

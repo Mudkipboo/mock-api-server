@@ -133,7 +133,7 @@ app.post('/config', (req, res) => {
 
 // Serve control panel HTML
 app.get('/', (req, res) => {
-  res.send(`
+  const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -379,7 +379,7 @@ app.get('/', (req, res) => {
         let currentNetwork = 'none';
         
         // Set the API endpoint dynamically based on current host
-        const apiEndpoint = `${window.location.origin}/api`;
+        const apiEndpoint = \`\${window.location.origin}/api\`;
         document.getElementById('apiEndpoint').textContent = apiEndpoint;
         
         // Status button handling
@@ -471,7 +471,8 @@ app.get('/', (req, res) => {
     </script>
 </body>
 </html>
-  `);
+  `;
+  res.send(html);
 });
 
 // Start the server

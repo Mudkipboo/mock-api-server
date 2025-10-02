@@ -322,7 +322,7 @@ app.get('/', (req, res) => {
         
         <div class="endpoint-display">
             <strong>API Endpoint:</strong><br>
-            <code>http://localhost:${PORT}/api</code>
+            <code id="apiEndpoint">Loading...</code>
         </div>
         
         <div class="control-group">
@@ -377,6 +377,10 @@ app.get('/', (req, res) => {
         let currentStatus = 200;
         let currentDelay = 0;
         let currentNetwork = 'none';
+        
+        // Set the API endpoint dynamically based on current host
+        const apiEndpoint = `${window.location.origin}/api`;
+        document.getElementById('apiEndpoint').textContent = apiEndpoint;
         
         // Status button handling
         document.querySelectorAll('.status-btn').forEach(btn => {
